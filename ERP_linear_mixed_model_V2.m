@@ -313,6 +313,11 @@ for group_i = 1:4
         subplot(4, 3, subplot_idx);
         hold on;
 
+        % Set consistent y-axis and grid
+        ylim(y_limits);
+        yticks(y_limits(1):3:y_limits(2));
+        grid on;
+
         if cond_j == 1
             % --------- CUE ---------
             idx_cue_1 = group_idx & (cue_half == 1);
@@ -321,34 +326,25 @@ for group_i = 1:4
             cue1 = sum(idx_cue_1);
             cue2 = sum(idx_cue_2);
 
-            idx_cd_1 = group_idx & (cue_half == 1);
-            idx_cd_2 = group_idx & (cue_half == 2);
+            b1 = bar(1:cue1, cue_values(idx_cue_1), 0.4, 'FaceColor','g', 'EdgeColor', 'k');
+            b2= bar(cue1+2:cue1+1+cue2, cue_values(idx_cue_2), 0.4, 'FaceColor', 'm' , 'EdgeColor', 'k');
 
-            cd1 = sum(idx_cd_1);
-            cd2 = sum(idx_cd_2);
+            % Model lines
+            x1 = 1:cue1; x2 = cue1+2:cue1+1+cue2;
+            plot(x1, predicted_cue(idx_cue_1), '-', 'Color', 'k', 'LineWidth', 2);
+            plot(x2, predicted_cue(idx_cue_2), '-', 'Color', 'k', 'LineWidth', 2);
+            plot(x1, predicted_cue_covar(idx_cue_1), '--', 'Color', 'y', 'LineWidth', 2);
+            plot(x2, predicted_cue_covar(idx_cue_2), '--', 'Color', 'y', 'LineWidth', 2);
 
-            bar(1:cue1, cue_values(idx_cue_1), 0.4, 'FaceColor',[0.9290 0.6940 0.1250], 'EdgeColor', 'k');
-            bar(cue1+2:cue1+1+cue2, cue_values(idx_cue_2), 0.4, 'FaceColor', [0.4940 0.1840 0.5560] , 'EdgeColor', 'k');
+            l1 = plot(nan, nan, '-', 'Color', 'k', 'LineWidth', 2);
+            l2 = plot(nan, nan, '--', 'Color', 'y', 'LineWidth', 2);
 
-            % ---- PLOT MODEL LINES for CUE ----
-            pred_cue_y1 = predicted_cue(idx_cue_1);
-            pred_cue_y2 = predicted_cue(idx_cue_2);
+            if subplot_idx == 1
+               legend([b1 b2 l1 l2],{'Half 1', 'Half 2', 'Model: Feedback Only', 'Model: Feedback + Covariates'}, ...
+                'Location', 'best');
+            end
 
-            pred_cue_covar_y1 = predicted_cue_covar(idx_cue_1);
-            pred_cue_covar_y2 = predicted_cue_covar(idx_cue_2);
-
-            x1 = 1:cue1;
-            x2 = cue1+2:cue1+1+cue2;
-
-            %offset= 0.05; % adds jitter to see 2 distinct line
-            plot(x1, pred_cue_y1, '-', 'Color', 'k', 'LineWidth', 2); % main model
-            plot(x2, pred_cue_y2, '-', 'Color', 'k', 'LineWidth', 2);
-
-            plot(x1, pred_cue_covar_y1, '--', 'Color', 'y', 'LineWidth', 2); % covariate model
-            plot(x2, pred_cue_covar_y2, '--', 'Color', 'y', 'LineWidth', 2);
-            grid on;
-
-        else
+        elseif cond_j == 2
             % --------- CUE AB ---------
             idx_ab_1 = group_idx & (cue_half == 1);
             idx_ab_2 = group_idx & (cue_half == 2);
@@ -359,22 +355,13 @@ for group_i = 1:4
             bar(1:ab1, cue_AB_values(idx_ab_1), 0.4, 'FaceColor','g', 'EdgeColor', 'k');
             bar(ab1+2:ab1+1+ab2, cue_AB_values(idx_ab_2), 0.4, 'FaceColor', 'm' , 'EdgeColor', 'k');
 
-            % ---- PLOT MODEL LINES for CUE AB ----
-            pred_cue_AB_y1 = predicted_cue_ab(idx_ab_1);
-            pred_cue_AB_y2 = predicted_cue_ab(idx_ab_2);
+            x1 = 1:ab1; x2 = ab1+2:ab1+1+ab2;
+            plot(x1, predicted_cue_ab(idx_ab_1), '-', 'Color', 'k', 'LineWidth', 2);
+            plot(x2, predicted_cue_ab(idx_ab_2), '-', 'Color', 'k', 'LineWidth', 2);
+            plot(x1, predicted_cue_ab_covar(idx_ab_1), '--', 'Color', 'y', 'LineWidth', 2);
+            plot(x2, predicted_cue_ab_covar(idx_ab_2), '--', 'Color', 'y', 'LineWidth', 2);
 
-            pred_cue_AB_covar_y1 = predicted_cue_ab_covar(idx_ab_1);
-            pred_cue_AB_covar_y2 = predicted_cue_ab_covar(idx_ab_2);
-
-            x1 = 1:ab1;
-            x2 = ab1+2:ab1+1+ab2;
-
-            plot(x1, pred_cue_AB_y1, '-', 'Color', 'k', 'LineWidth', 2); % main model
-            plot(x2, pred_cue_AB_y2, '-', 'Color', 'k', 'LineWidth', 2);
-
-            plot(x1, pred_cue_AB_covar_y1, '--', 'Color', 'y', 'LineWidth', 2); % covariate model
-            plot(x2, pred_cue_AB_covar_y2, '--', 'Color', 'y', 'LineWidth', 2);
-            grid on;
+        else
             % --------- CUE CD ---------
             idx_cd_1 = group_idx & (cue_half == 1);
             idx_cd_2 = group_idx & (cue_half == 2);
@@ -385,54 +372,26 @@ for group_i = 1:4
             bar(1:cd1, cue_CD_values(idx_cd_1), 0.4, 'FaceColor','g', 'EdgeColor', 'k');
             bar(cd1+2:cd1+1+cd2, cue_CD_values(idx_cd_2), 0.4, 'FaceColor', 'm' , 'EdgeColor', 'k');
 
-            % ---- PLOT MODEL LINES for CUE AB ----
-            pred_cue_CD_y1 = predicted_cue_cd(idx_cd_1);
-            pred_cue_CD_y2 = predicted_cue_cd(idx_cd_2);
+            x1 = 1:cd1; x2 = cd1+2:cd1+1+cd2;
+            plot(x1, predicted_cue_cd(idx_cd_1), '-', 'Color', 'k', 'LineWidth', 2);
+            plot(x2, predicted_cue_cd(idx_cd_2), '-', 'Color', 'k', 'LineWidth', 2);
+            plot(x1, predicted_cue_cd_covar(idx_cd_1), '--', 'Color', 'y', 'LineWidth', 2);
+            plot(x2, predicted_cue_cd_covar(idx_cd_2), '--', 'Color', 'y', 'LineWidth', 2);
 
-            pred_cue_CD_covar_y1 = predicted_cue_cd_covar(idx_cd_1);
-            pred_cue_CD_covar_y2 = predicted_cue_cd_covar(idx_cd_2);
-
-            x1 = 1:cd1;
-            x2 = cd1+2:cd1+1+cd2;
-
-            plot(x1, pred_cue_CD_y1, '-', 'Color', 'k', 'LineWidth', 2); % main model
-            plot(x2, pred_cue_CD_y2, '-', 'Color', 'k', 'LineWidth', 2);
-            plot(x1, pred_cue_CD_covar_y1, '--', 'Color', 'y', 'LineWidth', 2); % covariate model
-            plot(x2, pred_cue_CD_covar_y2, '--', 'Color', 'y', 'LineWidth', 2);
-            grid on;
-
-        ylim(y_limits);
-        yticks(-12:3:9);
-        title(condition_names{cond_j});
-        end
         end
 
-        %ylim(y_limits);
-        yticks(-12:3:9);
-        title(condition_names{cond_j});
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
         if cond_j == 1
             ylabel(group_labels{group_i});
         end
         if group_i == 4
             xlabel('Subjects');
         end
-
-        if subplot_idx == 2
-        % Dummy handles for accurate legend
-            b1 = bar(nan, nan, 'FaceColor',[0.9290 0.6940 0.1250]); % Negative bar 
-            b2 = bar(nan, nan, 'FaceColor','g'); % Negative bar
-            b3 = bar(nan, nan, 'FaceColor', 'm'); % Positive bar
-            l1 = plot(nan, nan, '-', 'Color', 'k', 'LineWidth', 2);  % Main model
-            l2 = plot(nan, nan, '--', 'Color', 'y', 'LineWidth', 2); % Covariate model
-
-    legend([b1 b2 l1 l2], ...
-        {'Cue', 'Cue AB', 'Cue CD' ...
-         'Model: Feedback Only', 'Model: Feedback + Covariates'}, ...
-        'Location', 'northeast');
-        end
-
-        end
-grid on;
+    end
+end
 
 %% Figure 4: plots predicted models on the corresponding FEEDBACK bar plots
 
@@ -529,8 +488,7 @@ for group_i = 1:4
         'Location', 'northeast');
         end
 
-        end
+   end
 grid on;
 end
-
 %%
