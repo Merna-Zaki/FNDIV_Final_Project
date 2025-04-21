@@ -41,8 +41,8 @@ for group_i = 1:4
         hold on;
 
         % Plot each subject's bar separately
-        idx_H1 = group_idx & (Cue_half == 1);
-        idx_H2 = group_idx & (Cue_half == 2);
+        idx_H1 = group_idx & (cue_half == 1);
+        idx_H2 = group_idx & (cue_half == 2);
 
         c_H1 = sum(idx_H1);
         c_H2 = sum(idx_H2);
