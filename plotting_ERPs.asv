@@ -63,7 +63,7 @@ sgtitle ('Cue 1st Half vs Cue 2nd Half');
 
 % Plotting OUD Active ERP
 subplot(2,2,1);
-plot(timepoints, OUD_Active_cue_h1_Cz, 'Color', [0.13 0.40 0.33], 'LineStyle', '-', 'LineWidth', 1.5)
+plot(timepoints, OUD_Active_cue_h1_Cz, 'Color', [0.29 0.48 0.02], 'LineStyle', '-', 'LineWidth', 1.5)
 hold on;
 plot(timepoints, OUD_Active_cue_h2_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth',1.5)
 
@@ -71,7 +71,6 @@ yLimit= [-4,8]; %defines y-axis limits that will be used for the gray shaded are
 ylim([-4, 8]); % sets the y-axis range
 yticks(-4:2:8); % adds a line in increaments of 2
 ylabel ('Amplitude (µV)')
-yline(0, 'k', 'LineWidth', 1) % adds a black line at amplitude 0 (y=0)
 xline(0, 'k', 'LineWidth', 1) % adds a black line at stimlus onset (x=0)
 xlabel('Time (ms)')
 patch([235 285 285 235], [yLimit(1) yLimit(1) yLimit(2) yLimit(2)],[0.8 0.8 0.8], 'EdgeColor', 'none', 'FaceAlpha', 0.4) % adds a gray shaded area around n200 time window 
@@ -81,13 +80,12 @@ grid on;
 
 % Plotting OUD Sham ERP
 subplot(2,2,2);
-plot(timepoints, OUD_Sham_cue_h1_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, OUD_Sham_cue_h1_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '-', 'LineWidth',1.5)
 hold on;
 plot(timepoints, OUD_Sham_cue_h2_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth',1.5)
 ylim([-4, 8]); % sets the y-axis range
 yticks(-4:2:8); % adds a line in increaments of 2
 ylabel ('Amplitude (µV)')
-yline(0, 'k', 'LineWidth', 1) % adds a black line at amplitude 0 (y=0)
 xline(0, 'k', 'LineWidth', 1) % adds a black line at stimlus onset (x=0)
 xlabel('Time (ms)')
 patch([235 285 285 235], [yLimit(1) yLimit(1) yLimit(2) yLimit(2)],[0.8 0.8 0.8], 'EdgeColor', 'none', 'FaceAlpha', 0.4) % adds a gray shaded area around n200 time window 
@@ -96,13 +94,12 @@ grid on;
 
 % Plotting Healthy Controls Active ERP
 subplot(2,2,3);
-plot(timepoints, Ctrl_Active_cue_h1_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Active_cue_h1_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '-', 'LineWidth',1.5)
 hold on;
 plot(timepoints, Ctrl_Active_cue_h2_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth',1.5)
 ylim([-4, 8]); % sets the y-axis range
 yticks(-4:2:8); % adds a line in increaments of 2
 ylabel ('Amplitude (µV)')
-yline(0, 'k', 'LineWidth', 1) % adds a black line at amplitude 0 (y=0)
 xline(0, 'k', 'LineWidth', 1) % adds a black line at stimlus onset (x=0)
 xlabel('Time (ms)')
 patch([235 285 285 235], [yLimit(1) yLimit(1) yLimit(2) yLimit(2)],[0.8 0.8 0.8], 'EdgeColor', 'none', 'FaceAlpha', 0.4) % adds a gray shaded area around n200 time window 
@@ -111,13 +108,12 @@ grid on;
 
 % Plotting Healthy Controls Sham ERP
 subplot(2,2,4);
-plot(timepoints, Ctrl_Sham_cue_h1_Cz, 'Color', [0.13 0.40 0.33], 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Sham_cue_h1_Cz, 'Color', [0.29, 0.48, 0.02], 'LineStyle', '-', 'LineWidth',1.5)
 hold on;
 plot(timepoints, Ctrl_Sham_cue_h2_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth',1.5)
 ylim([-4, 8]); % sets the y-axis range
 yticks(-4:2:8); % adds a line in increaments of 2
 ylabel ('Amplitude (µV)')
-yline(0, 'k', 'LineWidth', 1) % adds a black line at amplitude 0 (y=0)
 xline(0, 'k', 'LineWidth', 1) % adds a black line at stimlus onset (x=0)
 xlabel('Time (ms)')
 patch([235 285 285 235], [yLimit(1) yLimit(1) yLimit(2) yLimit(2)],[0.8 0.8 0.8], 'EdgeColor', 'none', 'FaceAlpha', 0.4) % adds a gray shaded area around n200 time window 
@@ -133,9 +129,9 @@ sgtitle ('AB & CD Cues during 1st Half vs 2nd Half');
 
 % Plotting OUD Active ERP
 subplot(2,2,1);
-plot(timepoints, OUD_Active_cue_h1_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, OUD_Active_cue_h1_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '-', 'LineWidth',1.5)
 hold on;
-plot(timepoints, OUD_Active_cue_h2_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, OUD_Active_cue_h2_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '--', 'LineWidth',1.5)
 plot(timepoints, OUD_Active_cue_h1_CD_Cz, 'Color', 'm' , 'LineStyle', '-', 'LineWidth',1.5)
 plot(timepoints, OUD_Active_cue_h2_CD_Cz, 'Color', 'm' , 'LineStyle', '--', 'LineWidth',1.5)
 
@@ -151,9 +147,9 @@ grid on;
 
 % Plotting OUD Sham ERP
 subplot(2,2,2);
-plot(timepoints, OUD_Sham_cue_h1_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, OUD_Sham_cue_h1_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '-', 'LineWidth',1.5)
 hold on;
-plot(timepoints, OUD_Sham_cue_h2_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, OUD_Sham_cue_h2_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '--', 'LineWidth',1.5)
 plot(timepoints, OUD_Sham_cue_h1_CD_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth',1.5)
 plot(timepoints, OUD_Sham_cue_h2_CD_Cz, 'Color', 'm', 'LineStyle', '--', 'LineWidth',1.5)
 
@@ -168,9 +164,9 @@ grid on;
 
 % Plotting Healthy Controls Active ERP
 subplot(2,2,3);
-plot(timepoints, Ctrl_Active_cue_h1_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Active_cue_h1_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '-', 'LineWidth',1.5)
 hold on;
-plot(timepoints, Ctrl_Active_cue_h2_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Active_cue_h2_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '--', 'LineWidth',1.5)
 plot(timepoints, Ctrl_Active_cue_h1_CD_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth',1.5)
 plot(timepoints, Ctrl_Active_cue_h2_CD_Cz, 'Color', 'm', 'LineStyle', '--', 'LineWidth',1.5)
 
@@ -185,11 +181,11 @@ grid on;
 
 % Plotting Healthy Controls Sham ERP
 subplot(2,2,4);
-plot(timepoints, Ctrl_Sham_cue_h1_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Sham_cue_h1_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '-', 'LineWidth','1.5)
 hold on;
-plot(timepoints, Ctrl_Sham_cue_h2_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '--', 'LineWidth',1.5)
-plot(timepoints, Ctrl_Sham_cue_h1_CD_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth',1.5)
-plot(timepoints, Ctrl_Sham_cue_h2_CD_Cz, 'Color', 'm', 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Sham_cue_h2_AB_Cz, 'Color', [0.29, 0.48, 0.02] , 'LineStyle', '--', 'LineWidth','1.5')
+plot(timepoints, Ctrl_Sham_cue_h1_CD_Cz, 'Color', 'm', 'LineStyle', '-', 'LineWidth','1.5')
+plot(timepoints, Ctrl_Sham_cue_h2_CD_Cz, 'Color', 'm', 'LineStyle', '--', 'LineWidth','1.5')
 
 ylim([-4, 8]); % sets the y-axis range
 yticks(-4:2:8); % adds a line in increaments of 2
@@ -209,11 +205,11 @@ sgtitle ('Positve & Negative Feedback 1st Half vs Half');
 
 % Plotting OUD Active ERP
 subplot(2,2,1);
-plot(timepoints, OUD_Active_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, OUD_Active_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth','1.5')
 hold on;
-plot(timepoints, OUD_Active_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth', 1.5)
-plot(timepoints, OUD_Active_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth',1.5)
-plot(timepoints, OUD_Active_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, OUD_Active_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth','1.5')
+plot(timepoints, OUD_Active_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth','1.5')
+plot(timepoints, OUD_Active_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth','1.5')
 
 yLimits= [-4,16]; %defines y-axis limits that will be used for the gray shaded area
 ylim([-4, 16]); % sets the y-axis range
@@ -228,11 +224,11 @@ grid on;
 
 % Plotting OUD Sham ERP
 subplot(2,2,2);
-plot(timepoints, OUD_Sham_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, OUD_Sham_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth','1.5')
 hold on;
-plot(timepoints, OUD_Sham_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth',1.5)
-plot(timepoints, OUD_Sham_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth',1.5)
-plot(timepoints, OUD_Sham_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, OUD_Sham_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth','1.5')
+plot(timepoints, OUD_Sham_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth','1.5')
+plot(timepoints, OUD_Sham_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth','1.5')
 
 ylim([-4, 16]); % sets the y-axis range
 yticks(-4:2:16); % adds a line in increaments of 2
@@ -245,11 +241,11 @@ grid on;
 
 % Plotting Healthy Controls Active ERP
 subplot(2,2,3);
-plot(timepoints, Ctrl_Active_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Active_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth','1.5')
 hold on;
-plot(timepoints, Ctrl_Active_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth',1.5)
-plot(timepoints, Ctrl_Active_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth',1.5)
-plot(timepoints, Ctrl_Active_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Active_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth','1.5')
+plot(timepoints, Ctrl_Active_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth','1.5')
+plot(timepoints, Ctrl_Active_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth','1.5')
 
 ylim([-4, 16]); % sets the y-axis range
 yticks(-4:2:16); % adds a line in increaments of 2
@@ -262,11 +258,11 @@ grid on;
 
 % Plotting Healthy Controls Sham ERP
 subplot(2,2,4);
-plot(timepoints, Ctrl_Sham_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Sham_pos_h1_Cz, 'Color', 'b', 'LineStyle', '-', 'LineWidth','1.5')
 hold on;
-plot(timepoints, Ctrl_Sham_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth',1.5)
-plot(timepoints, Ctrl_Sham_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth',1.5)
-plot(timepoints, Ctrl_Sham_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth',1.5)
+plot(timepoints, Ctrl_Sham_neg_h1_Cz, 'Color', 'r', 'LineStyle', '-', 'LineWidth','1.5')
+plot(timepoints, Ctrl_Sham_pos_h2_Cz, 'Color', 'b', 'LineStyle', '--', 'LineWidth','1.5')
+plot(timepoints, Ctrl_Sham_neg_h2_Cz, 'Color', 'r', 'LineStyle', '--', 'LineWidth','1.5')
 
 ylim([-4, 16]); % sets the y-axis range
 yticks(-4:2:16); % adds a line in increaments of 2
