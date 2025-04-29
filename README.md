@@ -6,7 +6,9 @@ This repository contains MATLAB scripts to analyze event-related potential (ERP)
 ## Requirement
 
 MATLAB 2024b
+
 Statistics and Machine Learning Toolbox
+
 All scripts rely on exported preprocessed EEG data saved as a csv file. 
 
 Preprocessing was performed in _Brain Vision Analyzer 2.3_ and includes:
