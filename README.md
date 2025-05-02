@@ -9,7 +9,7 @@ MATLAB 2024b
 
 Statistics and Machine Learning Toolbox
 
-All scripts rely on exported preprocessed EEG data saved as a csv file. 
+All scripts rely on exported preprocessed EEG data saved as a CSV file. 
 
 Preprocessing was performed in _Brain Vision Analyzer 2.3_ and includes:
 
@@ -32,8 +32,10 @@ Make sure your dataset uses the same variable names as expected in the scripts (
 
 `ERP_linear_mixed_models_V3.m`- Same statistical analysis as V2 but visualizes using boxplots for mean amplitudes and scatterplots for actual vs. predicted values. (USED FOR FINAL PROJECT)
 
+`beh_linear_mixed_models_V1.m`-  Runs linear mixed models to evaluate the effect of Transcranial Magnetic Stimulation (TMS) and Opioid Use Disorder (OUD) on behavioral performance (accuracy & RT). It visualizes accuracy and reaction time using boxplots and scatterplots for actual vs. predicted values. 
+
 ### Customize if Needed **
 
 All groups, conditions, and channels are customizable.
 
-Update file paths and names in the first 2 lines (if necessary)
+Update file paths and names in the first two lines (if necessary)
