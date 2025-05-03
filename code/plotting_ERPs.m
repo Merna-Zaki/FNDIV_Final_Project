@@ -1,4 +1,5 @@
-addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project')
+addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project/code')
+addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project/data')
 feedback_data = readtable('feedback_waveforms.csv'); %imports csv file containing exported feeedback waveforms
 cue_data = readtable('cue_waveforms.csv'); %imports csv file containing exported cue waveforms
 
@@ -505,7 +506,6 @@ grid on;
 figure (2);
 sgtitle ('AB & CD Cues during 1st Half vs 2nd Half (Cz)');
 
-
 % Plotting OUD Active ERP
 subplot(2,2,1);
 plot(timepoints, OUD_Active_cue_h1_AB_Cz, 'Color', [0.13 0.40 0.33] , 'LineStyle', '-', 'LineWidth',1.5)
@@ -620,7 +620,7 @@ SE_ctrl_sham_p = stdev15 / sqrt(sum(ctrl_sham));
 upper_SE_ctrl_sham_p= Ctrl_Sham_pos_all_Cz + SE_ctrl_sham_p;
 lower_SE_ctrl_sham_p= Ctrl_Sham_pos_all_Cz - SE_ctrl_sham_p;
 
-% Compute standard error , upper & lower bound for H2
+% Compute standard error , upper & lower bound for negative feedback
 SE_oud_active_n = stdev10 / sqrt(sum(oud_active));
 upper_SE_oud_active_n= OUD_Active_neg_all_Cz + SE_oud_active_n;
 lower_SE_oud_active_n= OUD_Active_neg_all_Cz - SE_oud_active_n;
