@@ -1,7 +1,7 @@
 addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project')
 data = readtable('data_file_V2.csv'); %imports data csv file
 
-%% Figure 1: boxplot to showcase each subject's N200 mean amp during cue h1 vs cue h2 (USE THIS)
+%% Figure 1: boxplot to showcase each subject's N200 mean amp during cue h1 vs cue h2
 
 % Extract variables
 cue_values = data.Cz_Cue;
@@ -133,7 +133,7 @@ ylabel('Cue (µV)');
 grid on;
 
 
-%% Figure 2: scatterplot to showcase each subject's N200 mean amp during positive & negative feedback (USE THIS)
+%% Figure 2: scatterplot to showcase each subject's N200 mean amp during positive & negative feedback
 
 neg_values= data.Cz_Neg;
 neg_half= data.Neg_half;
@@ -415,16 +415,16 @@ for group_i = 1:4
                idx_ab_2 = group_idx & (Cue_half == 2);
 
              % Cue ab Half 1
-            ab_h1 = scatter(cue_AB_values(idx_ab_1), cue_AB_values(idx_ab_1), ...
+            scatter(cue_AB_values(idx_ab_1), cue_AB_values(idx_ab_1), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-                    hold on;
-                    scatter(cue_AB_values(idx_ab_1), predicted_cue_ab(idx_ab_1), ...
+            hold on;
+            scatter(cue_AB_values(idx_ab_1), predicted_cue_ab(idx_ab_1), ...
                     60, '*', 'MarkerEdgeColor', 'r', 'MarkerFaceAlpha', 0.6);  % Predicted
 
             % Cue ab Half 2
-            ab_h2 = scatter(cue_AB_values(idx_ab_2), cue_AB_values(idx_ab_2), ...
+            scatter(cue_AB_values(idx_ab_2), cue_AB_values(idx_ab_2), ...
                     60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
-                    scatter(cue_AB_values(idx_ab_2), predicted_cue_ab(idx_ab_2), ...
+            scatter(cue_AB_values(idx_ab_2), predicted_cue_ab(idx_ab_2), ...
                     60, '*', 'MarkerEdgeColor', 'k', 'MarkerFaceAlpha', 0.6);  % Predicted
 
              % --------- CUE CD ---------
@@ -433,16 +433,16 @@ for group_i = 1:4
             idx_cd_2 = group_idx & (Cue_half == 2);
 
             % Cue Half 1
-            cd_h1 = scatter(cue_CD_values(idx_cd_1), cue_CD_values(idx_cd_1), ...
+            scatter(cue_CD_values(idx_cd_1), cue_CD_values(idx_cd_1), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-                    hold on;
-                    scatter(cue_CD_values(idx_cd_1), predicted_cue_cd(idx_cd_1), ...
+            hold on;
+            scatter(cue_CD_values(idx_cd_1), predicted_cue_cd(idx_cd_1), ...
                     60, '*', 'MarkerEdgeColor', 'r', 'MarkerFaceAlpha', 0.6);  % Predicted
 
             % Cue Half 2
-            cd_h2 = scatter(cue_CD_values(idx_cd_2), cue_CD_values(idx_cd_2), ...
+            scatter(cue_CD_values(idx_cd_2), cue_CD_values(idx_cd_2), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
-                    scatter(cue_CD_values(idx_cd_2), predicted_cue_cd(idx_cd_2), ...
+            scatter(cue_CD_values(idx_cd_2), predicted_cue_cd(idx_cd_2), ...
                     60, '*', 'MarkerEdgeColor', 'k', 'MarkerFaceAlpha', 0.6);  % Predicted
 
         end
@@ -518,16 +518,16 @@ for group_i = 1:4
             idx_pos_2 = group_idx & (pos_half == 2);
 
              % Positive Half 1
-            p_h1 = scatter(pos_values(idx_pos_1), pos_values(idx_pos_1), ...
+            scatter(pos_values(idx_pos_1), pos_values(idx_pos_1), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-                    hold on;
-                    scatter(pos_values(idx_pos_1), predicted_fb_pos(idx_pos_1), ...
+            hold on;
+            scatter(pos_values(idx_pos_1), predicted_fb_pos(idx_pos_1), ...
                     60, '*', 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.6);  % Predicted
 
             % Positive Half 2
-            p_h2 = scatter(pos_values(idx_pos_2), pos_values(idx_pos_2), ...
+            scatter(pos_values(idx_pos_2), pos_values(idx_pos_2), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
-                    scatter(pos_values(idx_pos_2), predicted_fb_pos(idx_pos_2), ...
+            scatter(pos_values(idx_pos_2), predicted_fb_pos(idx_pos_2), ...
                     60, '*', 'MarkerEdgeColor', 'k', 'MarkerFaceAlpha', 0.6);  % Predicted
 
         end
