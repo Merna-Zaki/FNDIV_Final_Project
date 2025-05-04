@@ -26,11 +26,9 @@ Make sure your dataset uses the same variable names as expected in the scripts (
 
 ## Repository contents
 
-`Plotting_ERP.m` - Plots grand average ERPs from two channels across four experimental groups and four task conditions. (USED FOR FINAL PROJECT)
+`Plotting_ERP.m` - Plots grand average ERPs from two channels across four experimental groups and four task conditions.
 
-`ERP_linear_mixed_models_V2.m`- Runs linear mixed models for each condition to evaluate the effect of Transcranial Magnetic Stimulation (TMS) and Opioid Use Disorder (OUD) on the N200- an event-related potential (ERP) linked to conflict monitoring and learning. Visualizes mean amplitudes with bar graphs and overlays the predicted model.
-
-`ERP_linear_mixed_models_V3.m`- Same statistical analysis as V2 but visualizes using boxplots for mean amplitudes and scatterplots for actual vs. predicted values. (USED FOR FINAL PROJECT)
+`ERP_linear_mixed_models_V3.m`- Runs linear mixed models for each condition to evaluate the effect of Transcranial Magnetic Stimulation (TMS) and Opioid Use Disorder (OUD) on the N200- an event-related potential (ERP) linked to conflict monitoring and learning. Visualizes using boxplots for mean amplitudes and scatterplots for actual vs. predicted values. 
 
 `beh_linear_mixed_models_V1.m`-  Runs linear mixed models to evaluate the effect of Transcranial Magnetic Stimulation (TMS) and Opioid Use Disorder (OUD) on behavioral performance (accuracy & RT). It visualizes accuracy and reaction time using boxplots and scatterplots for actual vs. predicted values. 
 
