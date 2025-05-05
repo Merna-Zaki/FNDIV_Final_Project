@@ -1,5 +1,5 @@
-addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project')
-data= readtable ('data_file.csv');
+addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project/data')
+data= readtable ('data_file_V2.csv');
 %% Figure 1: Bar plots to showcase accuracy during the training phase
 
 % Define group labels and colors
