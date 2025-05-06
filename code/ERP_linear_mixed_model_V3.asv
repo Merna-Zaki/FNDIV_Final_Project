@@ -530,7 +530,7 @@ for group_i = 1:4
         
             
         % Actual values on the x-axis and predicted on the y-axis (x = y)
-          scatter(cue_all(group_idx), predicted_cue(group_idx), ...
+          c_h1 = scatter(cue_all(group_idx), predicted_cue(group_idx), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); 
           hold on; 
         %plots a unity line
@@ -554,70 +554,6 @@ for group_i = 1:4
             % Plot unity line
             plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
         
-        end
-
-        % --- Titles and labels ---
-        if group_i == 1
-            title(condition_names{cond_j});
-        end
-        if cond_j == 1
-            ylabel(group_labels{group_i});
-        end
-        if group_i == 4
-            xlabel('Amplitude (µV)');
-        end
-    end
-end
-
-%% Figure 6: plots predicted models on the corresponding FEEDBACK scatterplots
-
-figure(6); clf;
-sgtitle('Actual vs Predicted N200 mean amplitude during feedback')
-
-condition_names = {'Negative Feedback','Positive Feedback'};
-y_limits = [-8, 36];
-x_limits = [-8, 36];
-
-for group_i = 1:4
-    switch group_i
-        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1); %oud sham
-        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1); %oud active 
-        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1); %control sham
-        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1); %control active
-    end
-
-    for cond_j = 1:2
-        subplot_idx = (group_i - 1) * 2 + cond_j;
-        subplot(4,2, subplot_idx);
-        hold on;
-
-        % Set consistent y-axis and grid
-        ylim(y_limits);
-        yticks(y_limits(1):4:y_limits(2));
-        xlim(x_limits);
-        xticks(x_limits(1):4:x_limits(2));
-        grid on;
-
-        
-            % --------- Negative Feedback ---------
-        if cond_j == 1
-
-            % Negative first half
-            n_all = scatter(neg_all(group_idx), predicted_fb_neg(group_idx), ...
-                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-            hold on;
-         % Plot unity line to see how well the model fits negative fb data
-            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
-
-         % --------- Positive Feeback ---------
-        else  
-            % scatterplot for positive feedback
-            p_all= scatter(pos_values(group_idx), predicted_fb_pos(group_idx), ...
-                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-            hold on; 
-          % Plot unity line to see how well the model fits positive fb data
-            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
-
         end
 
         % --- Titles and labels ---
@@ -708,6 +644,70 @@ for group_i = 1:4
           % Plot unity line
             plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
             
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Amplitude (µV)');
+        end
+    end
+end
+
+%% Figure 6: plots predicted models on the corresponding FEEDBACK scatterplots
+
+figure(6); clf;
+sgtitle('Actual vs Predicted N200 mean amplitude during feedback')
+
+condition_names = {'Negative Feedback','Positive Feedback'};
+y_limits = [-8, 36];
+x_limits = [-8, 36];
+
+for group_i = 1:4
+    switch group_i
+        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1); %oud sham
+        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1); %oud active 
+        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1); %control sham
+        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1); %control active
+    end
+
+    for cond_j = 1:2
+        subplot_idx = (group_i - 1) * 2 + cond_j;
+        subplot(4,2, subplot_idx);
+        hold on;
+
+        % Set consistent y-axis and grid
+        ylim(y_limits);
+        yticks(y_limits(1):4:y_limits(2));
+        xlim(x_limits);
+        xticks(x_limits(1):4:x_limits(2));
+        grid on;
+
+        
+            % --------- Negative Feedback ---------
+        if cond_j == 1
+
+            % Negative first half
+            n_all = scatter(neg_all(group_idx), predicted_fb_neg(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            hold on;
+         % Plot unity line to see how well the model fits negative fb data
+            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+
+         % --------- Positive Feeback ---------
+        else  
+            % scatterplot for positive feedback
+            p_all= scatter(pos_values(group_idx), predicted_fb_pos(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            hold on; 
+          % Plot unity line to see how well the model fits positive fb data
+            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+
         end
 
         % --- Titles and labels ---
