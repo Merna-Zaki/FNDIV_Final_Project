@@ -352,15 +352,10 @@ grid on;
 %% Linear mixed-effects model
 
 lme_Cue = fitlme(data,'Cz_Cue ~ TMS_group * OUD_group * Cue_half + (1|Subject)');
-lme_cue = fitlme(data, 'Cz_cue_all ~ TMS_group * OUD_group + (1 | Subject)');
 lme_Cue_AB = fitlme(data,'Cz_Cue_AB ~ TMS_group * OUD_group * Cue_AB_half + (1|Subject)');
 lme_Cue_CD = fitlme(data,'Cz_Cue_CD ~ TMS_group * OUD_group * Cue_CD_half + (1|Subject)');
-
 lme_Fb_P = fitlme(data,'Cz_Pos ~ TMS_group * OUD_group * Pos_half + (1|Subject)');
-lme_positive= fitlme(data, 'Cz_pos_all ~ TMS_group * OUD_group + (1 | Subject)');
-
 lme_Fb_N = fitlme(data,'Cz_Neg ~ TMS_group * OUD_group * Neg_half + (1|Subject)');
-lme_negative= fitlme(data, 'Cz_neg_all ~ TMS_group * OUD_group + (1 | Subject)'); 
 
 %% Linear mixed-effects model- accounting for age & gender & GCR
 
@@ -493,9 +488,21 @@ predicted_fb_pos_covar = predict(lme_Fb_P_covariates, data);
 
 %% Figure 5: plots predicted models on the corresponding CUE scatterplots
 
+% --- LMM ---
+lme_cue = fitlme(data, 'Cz_cue_all ~ TMS_group * OUD_group + (1 | Subject)');
+lme_positive= fitlme(data, 'Cz_pos_all ~ TMS_group * OUD_group + (1 | Subject)');
+lme_negative= fitlme(data, 'Cz_neg_all ~ TMS_group * OUD_group + (1 | Subject)'); 
+
+% --- prediciting n200 mean amp values based on LMM models ---
+predicted_CUE= predict(lme_cue, data);
+predicted_POS= predict(lme_positive, data);
+predicted_NEG= predict(lme_negative, data);
+
+% --- define variable used for plotting ---
 cue_all= data.Cz_cue_all;
 cue_ab_all= data.Cz_cue_AB_all;
 cue_cd_all= data.Cz_cue_CD_all;
+
 
 figure(5); clf;
 sgtitle('Actual vs Predicted N200 mean amplitude during cue')
@@ -527,28 +534,27 @@ for group_i = 1:4
         if cond_j == 1
         % --------- CUE ---------
         % All Cue (ab & cd averaged together)
-        
-            
+      
         % Actual values on the x-axis and predicted on the y-axis (x = y)
-          scatter(cue_all(group_idx), predicted_cue(group_idx), ...
+          scatter(cue_all(group_idx), predicted_CUE(group_idx), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); 
           hold on; 
         %plots a unity line
-          plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+         plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
 
          % --------- CUE AB ---------
         elseif cond_j == 2
 
           % Cue AB
-            scatter(cue_ab_all(group_idx), predicted_cue_ab(group_idx), ...
+           scatter(cue_ab_all(group_idx), predicted_CUE(group_idx), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-            hold on;
+           hold on;
          % Plot unity line
-            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
-             % --------- CUE CD ---------
+           plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+         % --------- CUE CD ---------
         else 
             % Cue CD
-            scatter(cue_cd_all(group_idx), predicted_cue_cd(group_idx), ...
+            scatter(cue_cd_all(group_idx), predicted_CUE(group_idx), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
             hold on;
             % Plot unity line
@@ -602,17 +608,17 @@ for group_i = 1:4
             % --------- Negative Feedback ---------
         if cond_j == 1
 
-            % Negative first half
-            n_all = scatter(neg_all(group_idx), predicted_fb_neg(group_idx), ...
+            % scatterplot for negative feedback
+            scatter(neg_all(group_idx), predicted_NEG(group_idx), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
             hold on;
          % Plot unity line to see how well the model fits negative fb data
-            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+           plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
 
          % --------- Positive Feeback ---------
         else  
             % scatterplot for positive feedback
-            p_all= scatter(pos_values(group_idx), predicted_fb_pos(group_idx), ...
+            scatter(pos_all(group_idx), predicted_POS(group_idx), ...
                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
             hold on; 
           % Plot unity line to see how well the model fits positive fb data
