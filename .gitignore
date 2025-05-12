@@ -1,0 +1,6 @@
+# Ignore MATLAB autosave and backup files
+*.asv
+
+# Ignore system files
+.DS_Store
+Thumbs.db
