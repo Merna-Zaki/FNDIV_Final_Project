@@ -639,9 +639,9 @@ for group_i = 1:4
     end
 end
 
-%% Figure 5: plots predicted models on the corresponding CUE scatterplots (split by half)
+%% Figure 7: plots predicted models on the corresponding CUE scatterplots (split by half)
 
-figure(5); clf;
+figure(7); clf;
 sgtitle('Actual vs Predicted N200 mean amplitude during cue')
 
 condition_names = {'Cue','Cue AB', 'Cue CD'};
@@ -729,9 +729,9 @@ for group_i = 1:4
     end
 end
 
-%% Figure 6: plots predicted models on the corresponding FEEDBACK scatterplots (split by half)
+%% Figure 8: plots predicted models on the corresponding FEEDBACK scatterplots (split by half)
 
-figure(6); clf;
+figure(8); clf;
 sgtitle('Actual vs Predicted N200 mean amplitude during feedback')
 
 condition_names = {'Negative Feedback','Positive Feedback'};
@@ -806,4 +806,169 @@ for group_i = 1:4
     end
 end
 
-%%
+%% Figure 9: plots predicted models (w/covar) on the corresponding CUE scatterplots (split by half)
+
+figure(9); clf;
+sgtitle('Actual vs Predicted N200 mean amplitude during cue (w/covar)')
+
+condition_names = {'Cue','Cue AB', 'Cue CD'};
+y_limits = [-12, 9];
+x_limits = [-12, 9];
+
+for group_i = 1:4
+    switch group_i
+        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1); %oud sham
+        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1); %oud active 
+        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1); %control sham
+        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1); %control active
+    end
+
+    for cond_j = 1:3
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+
+        % Set consistent y-axis and grid
+        ylim(y_limits);
+        yticks(y_limits(1):3:y_limits(2));
+        xlim(x_limits);
+        xticks(x_limits(1):3:x_limits(2));
+        grid on;
+
+        if cond_j == 1
+            % --------- CUE ---------
+          idx_cue_1 = group_idx & (Cue_half == 1);
+          idx_cue_2 = group_idx & (Cue_half == 2);
+
+            % Cue first half
+            c_h1 = scatter(cue_values(idx_cue_1), predicted_cue_covar(idx_cue_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            hold on; 
+
+            % Cue second half
+            c_h2 = scatter(cue_values(idx_cue_2), predicted_cue_covar(idx_cue_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
+            % plot a line of unity to see how the model fits the data
+            plot( xlim, ylim,'k--', 'LineWidth', 1.5);
+
+            if subplot_idx == 1
+               legend([c_h1 c_h2], {'Half 1', 'Half 2'},'Location', 'best');
+            end
+
+         % --------- CUE AB ---------
+        elseif cond_j == 2 
+
+           % AB Cues first half
+            scatter(cue_AB_values(idx_cue_1), predicted_cue_ab_covar(idx_cue_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            hold on;
+          % AB Cues second half
+            scatter(cue_AB_values(idx_cue_2), predicted_cue_ab_covar(idx_cue_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
+          % Plot unity line
+            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+
+             % --------- CUE CD ---------
+        else 
+
+           % CD Cues first half 
+            scatter(cue_CD_values(idx_cue_1), predicted_cue_cd_covar(idx_cue_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            hold on;
+          % CD Cues second half
+            scatter(cue_CD_values(idx_cue_2), predicted_cue_cd_covar(idx_cue_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
+          % Plot unity line
+            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+            
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Amplitude (µV)');
+        end
+    end
+end
+
+%% Figure 10: plots predicted models (w/covar) on the corresponding FEEDBACK scatterplots (split by half)
+
+figure(10); clf;
+sgtitle('Actual vs Predicted N200 mean amplitude during feedback (w/covar)')
+
+condition_names = {'Negative Feedback','Positive Feedback'};
+y_limits = [-8, 36];
+x_limits = [-8, 36];
+
+for group_i = 1:4
+    switch group_i
+        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1); %oud sham
+        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1); %oud active 
+        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1); %control sham
+        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1); %control active
+    end
+
+    for cond_j = 1:2
+        subplot_idx = (group_i - 1) * 2 + cond_j;
+        subplot(4, 2, subplot_idx);
+        hold on;
+
+        % Set consistent y-axis and grid
+        ylim(y_limits);
+        yticks(y_limits(1):4:y_limits(2));
+        xlim(x_limits);
+        xticks(x_limits(1):4:x_limits(2));
+        grid on;
+
+        if cond_j == 1
+            % --------- Negative Feedback ---------
+            idx_neg_1 = group_idx & (neg_half == 1);
+            idx_neg_2 = group_idx & (neg_half == 2);
+
+            % Negative first half
+            n_h1 = scatter(neg_values(idx_neg_1), predicted_fb_neg_covar(idx_neg_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            hold on;
+            % Negative second half
+            n_h2 = scatter(neg_values(idx_neg_2), predicted_fb_neg_covar(idx_neg_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
+            % Plot unity line
+            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+
+            if subplot_idx == 1
+               legend([n_h1 n_h2],{'Half 1','Half 2'},'Location', 'best');
+            end
+
+         % --------- Positive Feeback ---------
+        else  
+            idx_pos_1 = group_idx & (pos_half == 1);
+            idx_pos_2 = group_idx & (pos_half == 2);
+
+             % Positive Half 1
+            scatter(pos_values(idx_pos_1), predicted_fb_pos_covar(idx_pos_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            hold on; 
+            % Positive Half 2
+            scatter(pos_values(idx_pos_2),predicted_fb_pos_covar(idx_pos_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
+            plot(xlim, ylim, 'k--', 'LineWidth', 1.5);
+
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Amplitude (µV)');
+        end
+    end
+end
