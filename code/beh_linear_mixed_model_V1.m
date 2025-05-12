@@ -1,5 +1,9 @@
 addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project/data')
 data= readtable ('data_file_V2.csv');
+vn = {'Subject', 'TMS_group', 'OUD_group', 'age', 'gender', 'test_AB_acc', 'test_AB_RT', 'approach_A_acc', 'approach_A_RT', 'avoid_B_acc', 'avoid_B_RT'};
+test_table = table(data.Subject, data.TMS_group, data.OUD_group, data.age, data.gender, data.test_AB_acc, data.test_AB_RT, data.approach_A_acc, data.approach_A_RT, data.avoid_B_acc, data.avoid_B_RT, 'VariableNames', vn);
+test_table(76:end,:) = [];
+
 %% Figure 1: Bar plots to showcase accuracy during the training phase
 
 % Define group labels and colors
@@ -14,14 +18,10 @@ hold on;
 
 for i = 1:4
     switch i
-        case 1
-            group_idx = (data.TMS_group == -1) & (data.OUD_group == 1);
-        case 2
-            group_idx = (data.TMS_group == 1) & (data.OUD_group == 1);
-        case 3
-            group_idx = (data.TMS_group == -1) & (data.OUD_group == -1);
-        case 4
-            group_idx = (data.TMS_group == 1) & (data.OUD_group == -1);
+        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1);
+        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1);
+        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1);
+        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1);
     end
 
     % Cue H1 and H2 indices
@@ -57,20 +57,16 @@ grid on;
 
 %% Figure 2:  Bar plots to showcase reaction time during the training phase
 
-figure(2);clf;
+figure(2); clf;
 title('Reaction Time on training phase');
 hold on;
 
 for i = 1:4
     switch i
-        case 1
-            group_idx = (data.TMS_group == -1) & (data.OUD_group == 1);
-        case 2
-            group_idx = (data.TMS_group == 1) & (data.OUD_group == 1);
-        case 3
-            group_idx = (data.TMS_group == -1) & (data.OUD_group == -1);
-        case 4
-            group_idx = (data.TMS_group == 1) & (data.OUD_group == -1);
+        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1);
+        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1);
+        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1);
+        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1);
     end
 
     % Cue H1 and H2 indices
@@ -104,24 +100,24 @@ xticklabels(group_labels);
 legend([s1, s2], {'Half 1', 'Half 2'}, 'Location', 'best');
 grid on;
 
-%%
+
 % --- Define Variables ---
 
-OUD_active_rt= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1);
-OUD_active_rt_H1= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1) & (data.beh_half == 1);
-OUD_active_rt_H2= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1) & (data.beh_half== 2);
+% OUD_active_rt= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1);
+% OUD_active_rt_H1= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1) & (data.beh_half == 1);
+% OUD_active_rt_H2= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1) & (data.beh_half== 2);
 
-OUD_sham_rt= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1);
-OUD_sham_rt_H1= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1) & (data.beh_half== 1);
-OUD_sham_rt_H2= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1) & (data.beh_half== 2);
+% OUD_sham_rt= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1);
+% OUD_sham_rt_H1= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1) & (data.beh_half== 1);
+% OUD_sham_rt_H2= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1) & (data.beh_half== 2);
 
-Ctrl_active_rt= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1);
-Ctrl_active_rt_H1= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1) & (data.beh_half== 1);
-Ctrl_active_rt_H2= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1) & (data.beh_half== 2);
+% Ctrl_active_rt= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1);
+% Ctrl_active_rt_H1= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1) & (data.beh_half== 1);
+% Ctrl_active_rt_H2= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1) & (data.beh_half== 2);
 
-Ctrl_sham_rt= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1);
-Ctrl_sham_rt_H1= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1) & (data.beh_half== 1);
-Ctrl_sham_rt_H2= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1) & (data.beh_half== 2);
+% Ctrl_sham_rt= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1);
+% Ctrl_sham_rt_H1= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1) & (data.beh_half== 1);
+% Ctrl_sham_rt_H2= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1) & (data.beh_half== 2);
 
 %% Linear mixed-effects model
 
@@ -134,14 +130,14 @@ lme_ab_acc = fitlme(data,'Train_AB_acc ~ TMS_group * OUD_group * beh_half + (1|S
 lme_cd_rt = fitlme(data,'Train_CD_RT ~ TMS_group * OUD_group * beh_half + (1|Subject)');
 lme_cd_acc = fitlme(data,'Train_CD_acc ~ TMS_group * OUD_group * beh_half + (1|Subject)');
 
-lme_app_A_rt = fitlme(data, 'approach_A_RT ~ TMS_group * OUD_group + (1|Subject)');
-lme_app_A_acc = fitlme(data, 'approach_A_acc ~ TMS_group * OUD_group + (1|Subject)');
+lme_app_A_rt = fitlme(test_table, 'approach_A_RT ~ TMS_group * OUD_group + (1|Subject)');
+lme_app_A_acc = fitlme(test_table, 'approach_A_acc ~ TMS_group * OUD_group + (1|Subject)');
 
-lme_avoid_B_rt = fitlme(data,'avoid_B_RT ~ TMS_group * OUD_group + (1|Subject)');
-lme_avoid_B_acc = fitlme(data,'avoid_B_acc ~ TMS_group * OUD_group + (1|Subject)');
+lme_avoid_B_rt = fitlme(test_table,'avoid_B_RT ~ TMS_group * OUD_group + (1|Subject)');
+lme_avoid_B_acc = fitlme(test_table,'avoid_B_acc ~ TMS_group * OUD_group + (1|Subject)');
 
-lme_test_rt= fitlme(data,'test_AB_RT ~ TMS_group * OUD_group + (1|Subject)');
-lme_test_acc= fitlme(data, 'test_AB_acc ~ TMS_group * OUD_group + (1|Subject)');
+lme_test_rt= fitlme(test_table,'test_AB_RT ~ TMS_group * OUD_group + (1|Subject)');
+lme_test_acc= fitlme(test_table, 'test_AB_acc ~ TMS_group * OUD_group + (1|Subject)');
 
 %% Linear mixed-effects model- accounting for age & gender & GCR
 
@@ -154,14 +150,14 @@ lme_ab_acc_covariates = fitlme(data,'Train_AB_acc ~ TMS_group * OUD_group * beh_
 lme_cd_rt_covariates = fitlme(data,'Train_CD_RT ~ TMS_group * OUD_group * beh_half + gender + age + (1|Subject)');
 lme_cd_acc_covariates = fitlme(data,'Train_CD_acc ~ TMS_group * OUD_group * beh_half + gender + age +(1|Subject)');
 
-lme_app_A_rt_covariates = fitlme(data,'approach_A_RT ~ TMS_group * OUD_group + gender + age +(1|Subject)');
-lme_app_A_acc_covariates = fitlme(data,'approach_A_acc ~ TMS_group * OUD_group + gender + age +(1|Subject)');
+lme_app_A_rt_covariates = fitlme(test_table,'approach_A_RT ~ TMS_group * OUD_group + gender + age +(1|Subject)');
+lme_app_A_acc_covariates = fitlme(test_table,'approach_A_acc ~ TMS_group * OUD_group + gender + age +(1|Subject)');
 
-lme_avoid_B_rt_covariates= fitlme(data,'avoid_B_RT ~ TMS_group * OUD_group + gender + age + (1|Subject)');
-lme_avoid_B_acc_covariates= fitlme(data,'avoid_B_acc ~ TMS_group * OUD_group + gender + age + (1|Subject)');
+lme_avoid_B_rt_covariates= fitlme(test_table,'avoid_B_RT ~ TMS_group * OUD_group + gender + age + (1|Subject)');
+lme_avoid_B_acc_covariates= fitlme(test_table,'avoid_B_acc ~ TMS_group * OUD_group + gender + age + (1|Subject)');
 
-lme_test_rt_covariates= fitlme(data,'test_AB_RT ~ TMS_group * OUD_group + gender + age + (1|Subject)');
-lme_test_acc_covariates= fitlme(data,'test_AB_acc ~ TMS_group * OUD_group + gender + age + (1|Subject)');
+lme_test_rt_covariates= fitlme(test_table,'test_AB_RT ~ TMS_group * OUD_group + gender + age + (1|Subject)');
+lme_test_acc_covariates= fitlme(test_table,'test_AB_acc ~ TMS_group * OUD_group + gender + age + (1|Subject)');
 
 %% prediciting accuracy and RT values using the linear mixed models
 
@@ -169,41 +165,54 @@ lme_test_acc_covariates= fitlme(data,'test_AB_acc ~ TMS_group * OUD_group + gend
 predicted_rt = predict(lme_rt, data);
 predicted_acc = predict(lme_acc, data);
 
+predicted_rt_covar = predict(lme_rt_covariates, data);
+predicted_acc_covar = predict(lme_acc_covariates, data);
+
 predicted_ab_rt = predict(lme_ab_rt, data);
 predicted_ab_acc = predict(lme_ab_acc, data);
+
+predicted_ab_rt_covar = predict(lme_ab_rt_covariates, data);
+predicted_ab_acc_covar = predict(lme_ab_acc_covariates, data);
 
 predicted_cd_rt = predict(lme_cd_rt, data);
 predicted_cd_acc = predict(lme_cd_acc, data);
 
-predicted_test_rt = predict(lme_test_rt, data);
-predicted_test_acc = predict(lme_test_acc, data);
+predicted_cd_rt_covar = predict(lme_cd_rt_covariates, data);
+predicted_cd_acc_covar = predict(lme_cd_acc_covariates, data);
 
-%% Figure 3: plots predicted models on the corresponding accuracy plots
+predicted_test_rt = predict(lme_test_rt, test_table);
+predicted_test_acc = predict(lme_test_acc, test_table);
+
+predicted_test_rt_covar = predict(lme_test_rt_covariates, test_table);
+predicted_test_acc_covar = predict(lme_test_acc_covariates, test_table);
+
+predicted_avoid_B_rt= predict(lme_avoid_B_rt, test_table);
+predicted_avoid_B_acc= predict(lme_avoid_B_acc, test_table); 
+
+predicted_avoid_B_rt_covar= predict(lme_avoid_B_rt_covariates, test_table);
+predicted_avoid_B_acc_covar= predict(lme_avoid_B_acc_covariates, test_table);
+
+predicted_app_A_rt= predict(lme_app_A_rt, test_table); 
+predicted_app_A_acc= predict(lme_app_A_acc, test_table);
+
+predicted_app_A_rt_covar= predict(lme_app_A_rt_covariates, test_table); 
+predicted_app_A_acc_covar= predict(lme_app_A_acc_covariates, test_table); 
+
+%% Figure 3: plots predicted models on the corresponding accuracy plots (training phase)
+
+train= data.Train_acc;
+train_ab= data.Train_AB_acc;
+train_cd= data.Train_CD_acc;
 
 % Define group labels and colors
 group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
 condition_names = {'Train', 'Train AB', 'Train CD'};
-%ylim([0.35, 1]);
-%yticks(0.35:0.05:1);
-grid on;
 
 % Plot settings
 figure(3); clf;
-sgtitle('Accuracy during Training phase')
-
-train= data.Train_acc;
-train_H1 = (data.beh_half == 1) & (data.Train_acc);
-train_H2 = (data.beh_half == 2) & (data.Train_acc);
-testing_acc= data.test_AB_acc;
-
-train_ab= data.Train_AB_acc;
-train_ab_H1 = (data.beh_half == 1) & (data.Train_AB_acc);
-train_ab_H2 = (data.beh_half == 2) & (data.Train_AB_acc);
-
-train_cd= data.Train_CD_acc;
-train_cd_H1 = (data.beh_half == 1) & (data.Train_CD_acc);
-train_cd_H2 = (data.beh_half == 2) & (data.Train_CD_acc);
-
+sgtitle('Actual vs predicted accuracy during Training phase')
+xlim ([0.3 1]);
+ylim ([0.3 1]);
 
 for group_i = 1:4
     % Get group index
@@ -214,14 +223,11 @@ for group_i = 1:4
         case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1);
     end
 
-    for cond_j = 1:3
+    for cond_j = 1:length(condition_names)
         subplot_idx = (group_i - 1) * 3 + cond_j;
         subplot(4, 3, subplot_idx);
         hold on;
 
-        % Set consistent y-axis and grid
-        %ylim();
-        %yticks(y_limits(1):0.1:y_limits(2));
         grid on;
 
         if cond_j == 1
@@ -229,25 +235,19 @@ for group_i = 1:4
             idx_train_1 = group_idx & (data.beh_half == 1);
             idx_train_2 = group_idx & (data.beh_half == 2);
 
-            train1 = sum(idx_train_1);
-            train2 = sum(idx_train_2);
-
             % train Half 1
-            t_h1 = scatter(train(idx_train_1), train(idx_train_1), ...
-                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-                    hold on;
-            m1 = scatter(train(idx_train_1), predicted_acc(idx_train_1), ...
-                    60, '*', 'MarkerEdgeColor', 'r', 'MarkerFaceAlpha', 0.6);  % Predicted
-
+            t_h1 = scatter(train(idx_train_1), predicted_acc(idx_train_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+                   
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0.3 1], [0.3 1] ,'k--', 'LineWidth', 1.5);
             % train Half 2
-            t_h2 = scatter(train(idx_train_2), train(idx_train_2), ...
-                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
-            m2 = scatter(train(idx_train_2), predicted_acc(idx_train_2), ...
-                    60, '*', 'MarkerEdgeColor', 'k', 'MarkerFaceAlpha', 0.6);  % Predicted
+            t_h2 = scatter(train(idx_train_2), predicted_acc(idx_train_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
 
             if subplot_idx == 1
-               legend([t_h1 m1 t_h2 m2],{'Half 1 - actual', 'Half 1 - predicted', 'Half 2 - actual', 'Half 2 - predicted'}, ...
-                'Location', 'best');
+               legend([t_h1 t_h2],{'Half 1', 'Half 2'}, 'Location', 'best');
             end
 
              % --------- train AB ---------
@@ -255,18 +255,113 @@ for group_i = 1:4
                idx_train_ab_1 = group_idx & (data.beh_half == 1);
                idx_train_ab_2 = group_idx & (data.beh_half == 2);
 
-             % train AB Half 1
-           scatter(train_ab(idx_train_ab_1), train_ab(idx_train_ab_1), ...
-                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
-           hold on;
+           % train AB Half 1
            scatter(train_ab(idx_train_ab_1), predicted_ab_acc(idx_train_ab_1), ...
-                    60, '*', 'MarkerEdgeColor', 'r', 'MarkerFaceAlpha', 0.6);  % Predicted
-
-            % train AB Half 2
-           scatter(train_ab(idx_train_ab_2), train_ab(idx_train_ab_2), ...
-                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([0.3 1], [0.3 1] ,'k--', 'LineWidth', 1.5);
+           % train AB Half 2
            scatter(train_ab(idx_train_ab_2), predicted_ab_acc(idx_train_ab_1), ...
-                    60, '*', 'MarkerEdgeColor', 'k', 'MarkerFaceAlpha', 0.6);  % Predicted
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
+
+             % --------- train CD ---------
+        else 
+
+            idx_train_cd_1 = group_idx & (data.beh_half == 1);
+            idx_train_cd_2 = group_idx & (data.beh_half == 2);
+
+            % train CD Half 1
+            scatter(train_cd(idx_train_cd_1), predicted_cd_acc(idx_train_cd_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0.3 1], [0.3 1] ,'k--', 'LineWidth', 1.5);
+
+            % train CD Half 2
+            scatter(train_cd(idx_train_cd_2), predicted_cd_acc(idx_train_cd_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Accuracy %');
+        end
+    end
+end
+set(findall(gcf,'type','axes'), 'XLim', [0.30, 1], 'XTick', 0.30:0.1:1 ,'YLim', [0.30, 1], 'YTick', 0.30:0.1:1);
+
+%% Figure 4: plots predicted models on the corresponding RT plots (training phase)
+
+train_rt= data.Train_RT;
+train_ab_rt= data.Train_AB_RT;
+train_cd_rt= data.Train_CD_RT;
+
+% Define group labels and colors
+group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
+condition_names = {'Train', 'Train AB', 'Train CD'};
+
+% Plot settings
+figure(4); clf;
+sgtitle('Actual vs predicted RT during Training phase')
+xlim([200 2400]);
+ylim([200 2400]);
+
+for group_i = 1:4
+    % Get group index
+    switch group_i
+        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1);
+        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1);
+        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1);
+        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1);
+    end
+
+    for cond_j = 1:length(condition_names)
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+        grid on;
+
+        if cond_j == 1
+            % --------- train ---------
+            idx_train_1 = group_idx & (data.beh_half == 1);
+            idx_train_2 = group_idx & (data.beh_half == 2);
+
+            % train Half 1
+            t_h1 = scatter(train_rt(idx_train_1), predicted_rt(idx_train_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+                   
+            hold on;
+           % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400] ,'k--', 'LineWidth', 1.5);
+            % train Half 2
+            t_h2 = scatter(train_rt(idx_train_2), predicted_rt(idx_train_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
+
+            if subplot_idx == 1
+               legend([t_h1 t_h2],{'Half 1', 'Half 2'}, 'Location', 'best');
+            end
+
+             % --------- train AB ---------
+        elseif cond_j == 2 
+               idx_train_ab_1 = group_idx & (data.beh_half == 1);
+               idx_train_ab_2 = group_idx & (data.beh_half == 2);
+
+           % train AB Half 1
+           scatter(train_ab_rt(idx_train_ab_1), predicted_ab_rt(idx_train_ab_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+           % train AB Half 2
+           scatter(train_ab_rt(idx_train_ab_2), predicted_ab_rt(idx_train_ab_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
 
              % --------- train CD ---------
         else 
@@ -274,17 +369,85 @@ for group_i = 1:4
             idx_train_cd_2 = group_idx & (data.beh_half == 2);
 
             % train CD Half 1
-            scatter(train_cd(idx_train_cd_1), train_cd(idx_train_cd_1), ...
-                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4);  % Actual values (x = y)
+            scatter(train_cd_rt(idx_train_cd_1), predicted_cd_rt(idx_train_cd_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
             hold on;
-            scatter(train_cd(idx_train_cd_1), predicted_cd_acc(idx_train_cd_1), ...
-                    60, '*', 'MarkerEdgeColor', 'r', 'MarkerFaceAlpha', 0.6);  % Predicted
+            % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
 
             % train CD Half 2
-            scatter(train_cd(idx_train_cd_2), train_cd(idx_train_cd_2), ...
-                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);  % Actual
-            scatter(train_cd(idx_train_cd_2), predicted_cd_acc(idx_train_cd_2), ...
-                    60, '*', 'MarkerEdgeColor', 'k', 'MarkerFaceAlpha', 0.6);  % Predicted
+            scatter(train_cd_rt(idx_train_cd_2), predicted_cd_rt(idx_train_cd_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Reaction Time (ms)');
+        end
+    end
+end
+set(findall(gcf,'type','axes'), 'XLim', [200, 2400], 'XTick', 200:400:2400, 'YLim', [200, 2400], 'YTick', 200:400:2400)
+
+%% Figure 5: plots predicts models on corresponding testing phase accuracy plots 
+
+testing_acc= test_table.test_AB_acc;
+app_a= test_table.approach_A_acc;
+avoid_B= test_table.avoid_B_acc;
+
+% Define group labels and colors
+group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
+condition_names = {'Test', 'Approach A', 'Avoid B'};
+
+% Plot settings
+figure(5); clf;
+sgtitle('Actual vs predicted accuracy during Testing phase')
+
+for group_i = 1:4
+    % Get group index
+    switch group_i
+        case 1, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == 1);
+        case 2, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == 1);
+        case 3, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == -1);
+        case 4, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == -1);
+    end
+
+    for cond_j = 1:length(condition_names)
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+        grid on;
+
+            % --------- Test AB ---------
+        if cond_j == 1
+
+            scatter(testing_acc(group_idx), predicted_test_acc(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis          
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0 1], [0 1] ,'k--', 'LineWidth', 1.5);
+
+             % --------- Approach A ---------
+        elseif cond_j == 2
+
+           scatter(app_a(group_idx), predicted_app_A_acc(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([0 1], [0 1],'k--', 'LineWidth', 1.5);
+        
+             % --------- Avoid B ---------
+        else 
+            scatter(avoid_B(group_idx), predicted_avoid_B_acc(group_idx), ...
+                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0 1], [0 1],'k--', 'LineWidth', 1.5);
 
         end
 
@@ -296,11 +459,390 @@ for group_i = 1:4
             ylabel(group_labels{group_i});
         end
         if group_i == 4
-            xlabel('Amplitude (µV)');
+            xlabel('Accuracy (%)');
         end
     end
 end
-set(findall(gcf,'type','axes'), 'YLim', [0.30, 1], 'YTick', 0.30:0.1:1);
+set(findall(gcf,'type','axes'), 'XLim', [0, 1], 'XTick', 0:.2:1, 'YLim', [0, 1], 'YTick', 0:.2:1)
 
-%% Figure 4: plots predicted models on the corresponding RT plots
+%% Figure 6: plots predicts models on corresponding testing phase RT plots
+
+testing_rt= test_table.test_AB_RT;
+app_a_rt= test_table.approach_A_RT;
+avoid_B_rt= test_table.avoid_B_RT;
+
+% Define group labels and colors
+group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
+condition_names = {'Test', 'Approach A', 'Avoid B'};
+
+% Plot settings
+figure(6); clf;
+sgtitle('Actual vs predicted RT during Testing phase')
+
+for group_i = 1:4
+    % Get group index
+    switch group_i
+        case 1, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == 1);
+        case 2, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == 1);
+        case 3, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == -1);
+        case 4, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == -1);
+    end
+
+    for cond_j = 1:length(condition_names)
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+        grid on;
+
+            % --------- Test AB ---------
+        if cond_j == 1
+            scatter(testing_rt(group_idx), predicted_test_rt(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+                   
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+
+             % --------- Approach A ---------
+
+        elseif cond_j == 2
+           scatter(app_a_rt(group_idx), predicted_app_A_rt(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+        
+             % --------- Avoid B ---------
+        else 
+            scatter(avoid_B_rt(group_idx), predicted_avoid_B_rt(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Reaction Time (ms)');
+        end
+    end
+end
+set(findall(gcf,'type','axes'), 'XLim', [200, 2400], 'XTick', 200:400:2400, 'YLim', [200, 2400], 'YTick', 200:400:2400)
+
+%% Figure 7: plots predicts models on corresponding testing phase accuracy plots
+
+testing_acc= test_table.test_AB_acc;
+app_a= test_table.approach_A_acc;
+avoid_B= test_table.avoid_B_acc;
+
+% Define group labels and colors
+group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
+condition_names = {'Test', 'Approach A', 'Avoid B'};
+
+% Plot settings
+figure(7); clf;
+sgtitle('Actual vs predicted accuracy during Testing phase (w/covar)')
+
+for group_i = 1:4
+    % Get group index
+    switch group_i
+        case 1, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == 1);
+        case 2, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == 1);
+        case 3, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == -1);
+        case 4, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == -1);
+    end
+
+    for cond_j = 1:length(condition_names)
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+        grid on;
+
+            % --------- Test AB ---------
+        if cond_j == 1
+
+            scatter(testing_acc(group_idx), predicted_test_acc_covar(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis          
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0 1], [0 1] ,'k--', 'LineWidth', 1.5);
+
+             % --------- Approach A ---------
+        elseif cond_j == 2
+
+           scatter(app_a(group_idx), predicted_app_A_acc_covar(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([0 1], [0 1],'k--', 'LineWidth', 1.5);
+        
+             % --------- Avoid B ---------
+        else 
+            scatter(avoid_B(group_idx), predicted_avoid_B_acc_covar(group_idx), ...
+                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0 1], [0 1],'k--', 'LineWidth', 1.5);
+
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Accuracy (%)');
+        end
+    end
+end
+set(findall(gcf,'type','axes'), 'XLim', [0, 1], 'XTick', 0:.2:1, 'YLim', [0, 1], 'YTick', 0:.2:1)
+%% Figure 8: plots predicted models w/ covariates on the corresponding RT plots (training phase)
+
+train_rt= data.Train_RT;
+train_ab_rt= data.Train_AB_RT;
+train_cd_rt= data.Train_CD_RT;
+
+% Define group labels and colors
+group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
+condition_names = {'Train', 'Train AB', 'Train CD'};
+
+% Plot settings
+figure(8); clf;
+sgtitle('Actual vs predicted RT during Training phase (w/covar)')
+
+for group_i = 1:4
+    % Get group index
+    switch group_i
+        case 1, group_idx = (data.TMS_group == -1) & (data.OUD_group == 1);
+        case 2, group_idx = (data.TMS_group == 1) & (data.OUD_group == 1);
+        case 3, group_idx = (data.TMS_group == -1) & (data.OUD_group == -1);
+        case 4, group_idx = (data.TMS_group == 1) & (data.OUD_group == -1);
+    end
+
+    for cond_j = 1:length(condition_names)
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+        grid on;
+
+        if cond_j == 1
+            % --------- train ---------
+            idx_train_1 = group_idx & (data.beh_half == 1);
+            idx_train_2 = group_idx & (data.beh_half == 2);
+
+            % train Half 1
+            t_h1 = scatter(train_rt(idx_train_1), predicted_rt_covar(idx_train_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+                   
+            hold on;
+           % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400] ,'k--', 'LineWidth', 1.5);
+            % train Half 2
+            t_h2 = scatter(train_rt(idx_train_2), predicted_rt_covar(idx_train_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
+
+            if subplot_idx == 1
+               legend([t_h1 t_h2],{'Half 1', 'Half 2'}, 'Location', 'best');
+            end
+
+             % --------- train AB ---------
+        elseif cond_j == 2 
+               idx_train_ab_1 = group_idx & (data.beh_half == 1);
+               idx_train_ab_2 = group_idx & (data.beh_half == 2);
+
+           % train AB Half 1
+           scatter(train_ab_rt(idx_train_ab_1), predicted_ab_rt_covar(idx_train_ab_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+           % train AB Half 2
+           scatter(train_ab_rt(idx_train_ab_2), predicted_ab_rt_covar(idx_train_ab_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'b' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
+
+             % --------- train CD ---------
+        else 
+            idx_train_cd_1 = group_idx & (data.beh_half == 1);
+            idx_train_cd_2 = group_idx & (data.beh_half == 2);
+
+            % train CD Half 1
+            scatter(train_cd_rt(idx_train_cd_1), predicted_cd_rt_covar(idx_train_cd_1), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+
+            % train CD Half 2
+            scatter(train_cd_rt(idx_train_cd_2), predicted_cd_rt_covar(idx_train_cd_2), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'b', 'MarkerFaceAlpha', 0.4);
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Reaction Time (ms)');
+        end
+    end
+end
+set(findall(gcf,'type','axes'), 'XLim', [200, 2400], 'XTick', 200:400:2400, 'YLim', [200, 2400], 'YTick', 200:400:2400)
+
+%% Figure 9: plots predicts models on corresponding testing phase accuracy plots
+
+testing_acc= test_table.test_AB_acc;
+app_a= test_table.approach_A_acc;
+avoid_B= test_table.avoid_B_acc;
+
+% Define group labels and colors
+group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
+condition_names = {'Test', 'Approach A', 'Avoid B'};
+
+% Plot settings
+figure(9); clf;
+sgtitle('Actual vs predicted accuracy during Testing phase (w/covar)')
+
+for group_i = 1:4
+    % Get group index
+    switch group_i
+        case 1, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == 1);
+        case 2, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == 1);
+        case 3, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == -1);
+        case 4, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == -1);
+    end
+
+    for cond_j = 1:length(condition_names)
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+        grid on;
+
+            % --------- Test AB ---------
+        if cond_j == 1
+
+            scatter(testing_acc(group_idx), predicted_test_acc_covar(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis          
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0 1], [0 1] ,'k--', 'LineWidth', 1.5);
+
+             % --------- Approach A ---------
+        elseif cond_j == 2
+
+           scatter(app_a(group_idx), predicted_app_A_acc_covar(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([0 1], [0 1],'k--', 'LineWidth', 1.5);
+        
+             % --------- Avoid B ---------
+        else 
+            scatter(avoid_B(group_idx), predicted_avoid_B_acc_covar(group_idx), ...
+                     60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([0 1], [0 1],'k--', 'LineWidth', 1.5);
+
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Accuracy (%)');
+        end
+    end
+end
+set(findall(gcf,'type','axes'), 'XLim', [0, 1], 'XTick', 0:.2:1, 'YLim', [0, 1], 'YTick', 0:.2:1)
+
+%% Figure 10: plots predicts models on corresponding testing phase RT plots
+
+testing_rt= test_table.test_AB_RT;
+app_a_rt= test_table.approach_A_RT;
+avoid_B_rt= test_table.avoid_B_RT;
+
+% Define group labels and colors
+group_labels = {'Sham+OUD', 'Active+OUD', 'Sham+HC', 'Active+HC'};
+condition_names = {'Test', 'Approach A', 'Avoid B'};
+
+% Plot settings
+figure(10); clf;
+sgtitle('Actual vs predicted RT during Testing phase (w/covar)')
+
+for group_i = 1:4
+    % Get group index
+    switch group_i
+        case 1, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == 1);
+        case 2, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == 1);
+        case 3, group_idx = (test_table.TMS_group == -1) & (test_table.OUD_group == -1);
+        case 4, group_idx = (test_table.TMS_group == 1) & (test_table.OUD_group == -1);
+    end
+
+    for cond_j = 1:length(condition_names)
+        subplot_idx = (group_i - 1) * 3 + cond_j;
+        subplot(4, 3, subplot_idx);
+        hold on;
+        grid on;
+
+            % --------- Test AB ---------
+        if cond_j == 1
+            scatter(testing_rt(group_idx), predicted_test_rt_covar(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+                   
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+
+             % --------- Approach A ---------
+
+        elseif cond_j == 2
+           scatter(app_a_rt(group_idx), predicted_app_A_rt_covar(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % actual on the x-axis ad predicted on the y-axis
+           hold on;
+           % plot a line of unity to see how the model fits the data
+           plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+        
+             % --------- Avoid B ---------
+        else 
+            scatter(avoid_B_rt(group_idx), predicted_avoid_B_rt_covar(group_idx), ...
+                    60, 'o', 'MarkerEdgeColor', 'k' , 'MarkerFaceColor', 'r', 'MarkerFaceAlpha', 0.4); % Actual values (x = y)
+            hold on;
+            % plot a line of unity to see how the model fits the data
+            plot([200 2400], [200 2400],'k--', 'LineWidth', 1.5);
+
+        end
+
+        % --- Titles and labels ---
+        if group_i == 1
+            title(condition_names{cond_j});
+        end
+        if cond_j == 1
+            ylabel(group_labels{group_i});
+        end
+        if group_i == 4
+            xlabel('Reaction Time (ms)');
+        end
+    end
+end
+set(findall(gcf,'type','axes'), 'XLim', [200, 2400], 'XTick', 200:400:2400, 'YLim', [200, 2400], 'YTick', 200:400:2400)
+
+
+
 
