@@ -100,25 +100,6 @@ xticklabels(group_labels);
 legend([s1, s2], {'Half 1', 'Half 2'}, 'Location', 'best');
 grid on;
 
-
-% --- Define Variables ---
-
-% OUD_active_rt= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1);
-% OUD_active_rt_H1= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1) & (data.beh_half == 1);
-% OUD_active_rt_H2= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == 1) & (data.beh_half== 2);
-
-% OUD_sham_rt= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1);
-% OUD_sham_rt_H1= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1) & (data.beh_half== 1);
-% OUD_sham_rt_H2= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == 1) & (data.beh_half== 2);
-
-% Ctrl_active_rt= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1);
-% Ctrl_active_rt_H1= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1) & (data.beh_half== 1);
-% Ctrl_active_rt_H2= (data.Train_RT) & (data.TMS_group == 1) & (data.OUD_group == -1) & (data.beh_half== 2);
-
-% Ctrl_sham_rt= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1);
-% Ctrl_sham_rt_H1= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1) & (data.beh_half== 1);
-% Ctrl_sham_rt_H2= (data.Train_RT) & (data.TMS_group == -1) & (data.OUD_group == -1) & (data.beh_half== 2);
-
 %% Linear mixed-effects model
 
 lme_rt = fitlme(data,'Train_RT ~ TMS_group * OUD_group * beh_half + (1|Subject)');
