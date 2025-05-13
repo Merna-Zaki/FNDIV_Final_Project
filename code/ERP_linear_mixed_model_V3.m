@@ -1,4 +1,4 @@
-addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project')
+addpath ('/Users/School/Documents/GitHub/FNDIV_Final_project/data')
 data = readtable('data_file_V2.csv'); %imports data csv file
 
 %% Figure 1: boxplot to showcase each subject's N200 mean amp during cue h1 vs cue h2
